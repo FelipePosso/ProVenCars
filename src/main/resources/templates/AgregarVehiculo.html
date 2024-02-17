@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login | ProVenCarz</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</head>
+<body class="bodydash">
+
+<header class="header-dash">
+    <div class="logo">ProVenCarz</div>
+    <a th:href="@{/}" class="login-btn-dash">Log out</a>
+</header>
+<div class="sidebar">
+    <ul>
+        <a th:href="@{/dashboard}"><li class="active"><i class="fas fa-home"></i> GESTIÓN DATOS</li></a>
+        <a th:href="@{/listarDatosPersonales}" ><li class="active"><i class="fas fa-home"></i>ACTUALIZAR DATOS</li></a>
+        <a th:href="@{/listarVehiculo}" ><li class="active"><i class="fas fa-home"></i>LISTAR VEHICULOS</li></a>
+        <a th:href="@{/newVehiculo}" ><li class="active"><i class="fas fa-home"></i>AGREGAR VEHICULO</li></a>
+    </ul>
+</div>
+
+<div class="content">
+    <div class="header">
+        <h1>AGREGAR VEHICULO</h1>
+    </div>
+    <p>Ingrese el nuevo vehiculo:</p>
+    <div class="container mt-4">
+        <div class="col-sm-6">
+            <form th:action="@{/saveVehiculo}" th:object="${vehiculo}" method="post" onsubmit="return validateForm()" id="formularioVehiculo">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>AGREGAR VEHICULO</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label>PLACA</label>
+                            <input id="vehplaca" name="vehplaca" th:field="${vehiculo.vehplaca}" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="datid">VENDEDOR</label>
+                            <select id="datid" name="datid" th:field="${vehiculo.datosPersonales.datid}" class="form-control" required>
+                                <option th:value=1>Felipe</option>
+                                <option th:value=2>Andres</option>
+                                <option th:value=3>Camila</option>
+                                <option th:value=4>Martha</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="catid">CATEGORIA</label>
+                            <select id="catid" name="catid" class="form-control" th:field="${vehiculo.categoria.catid}" required>
+                                <option th:value=1>Campero</option>
+                                <option th:value=2>Automovil</option>
+                                <option th:value=3>Camionetas</option>
+                                <option th:value=4>SUV</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>MODELO</label>
+                            <input id="vehmodelo" name="vehmodelo" th:field="${vehiculo.vehmodelo}" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>MARCA</label>
+                            <input  id="vehmarca" name="vehmarca" th:field="${vehiculo.vehmarca}" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="vehestado">ESTADO</label>
+                            <select id="vehestado" name="catid" class="form-control" th:field="${vehiculo.vehestado}" required>
+                                <option th:value="Nuevo">Nuevo</option>
+                                <option th:value="Usado">Usado</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>PRECIO</label>
+                            <input id="vehprecio" name="vehprecio" th:field="${vehiculo.vehprecio}" class="form-control" required>
+                        </div>
+                        <div class="card-footer">
+                            <input type="submit" value="GUARDAR" class="btn btn-success">
+                        </div>
+                    </div>
+                    <script>
+                        function validateForm() {
+                            var vehplaca = document.getElementById("vehplaca").value;
+                            var vehmodelo = document.getElementById("vehmodelo").value;
+                            var vehprecio = document.getElementById("vehprecio").value;
+
+                            //  placa  3 letras y 3 números
+                            if (!/^[A-Z]{3}[0-9]{3}$/.test(vehplaca)) {
+                                alert("La placa debe tener 3 letras seguidas de 3 números.");
+                                return false;
+                            }
+
+                            // modelo  números
+                            if (!/^19[2-9]\d|20[0-1]\d|202[0-5]$/.test(vehmodelo)) {
+                                alert("El modelo debe estar entre 1920 y 2025 y solo pueden ser números.");
+                                return false;
+                            }
+
+                            //  precio  números
+                            if (!/^[1-9]\d*$/.test(vehprecio) || parseInt(vehprecio) < 1000000) {
+                                alert("El precio debe contener solo números y ser mayor o igual a $1,000,000.");
+                                return false;
+                            }
+
+                            return true;
+                        }
+                    </script>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

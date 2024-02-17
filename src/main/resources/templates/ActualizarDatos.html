@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login | ProVenCarz</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</head>
+<body class="bodydash">
+
+<header class="header-dash">
+    <div class="logo">ProVenCarz</div>
+    <a th:href="@{/}" class="login-btn-dash">Log out</a>
+</header>
+<div class="sidebar">
+    <ul>
+        <a th:href="@{/dashboard}"><li class="active"><i class="fas fa-home"></i> GESTIÓN DATOS</li></a>
+        <a th:href="@{/listarDatosPersonales}" ><li class="active"><i class="fas fa-home"></i>ACTUALIZAR DATOS</li></a>
+        <a th:href="@{/listarVehiculo}" ><li class="active"><i class="fas fa-home"></i>LISTAR VEHICULOS</li></a>
+        <a th:href="@{/newVehiculo}" ><li class="active"><i class="fas fa-home"></i>AGREGAR VEHICULO</li></a>
+    </ul>
+</div>
+
+<div class="content">
+    <div class="header">
+        <h1>ACTUALIZAR DATOS</h1>
+    </div>
+    <p>Selecciona un usuario para actualizar:</p>
+    <div class="container mt-4">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>NOMBRE</th>
+                <th>APELLIDO</th>
+                <th>TELÉFONO</th>
+                <th>CORREO</th>
+                <th>ACCIONES</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="datosPersonales:${datosPersonalesS}">
+                <td th:text="${datosPersonales.datnombre}"> </td>
+                <td th:text="${datosPersonales.datapellido}"> </td>
+                <td th:text="${datosPersonales.datelefono}"> </td>
+                <td th:text="${datosPersonales.datcorreo}"> </td>
+                <td>
+                    <a th:href="@{/editar/}+${datosPersonales.datid}" class="btn btn-warning">ACTUALIZAR</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
