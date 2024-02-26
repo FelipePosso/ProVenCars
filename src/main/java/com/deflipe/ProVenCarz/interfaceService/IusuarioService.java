@@ -9,4 +9,7 @@ public interface IusuarioService {
     public Optional<Usuario> listarUsuarioId(int usuid);
     public int save(Usuario u);
     public void delete(int usuid);
+    public Optional<Usuario> findByUsulogin(String usulogin);
+
+
 }

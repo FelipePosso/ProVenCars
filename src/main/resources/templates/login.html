@@ -12,19 +12,28 @@
 </header>
 <div class="login-container">
     <h2>Iniciar Sesión</h2>
-    <form class="login-form" action="#" method="post">
+    <form class="login-form" action="/login" method="post">
         <div class="form-group">
-            <label for="username">Usuario:</label>
-            <input type="text" id="username" name="username" required>
+            <label for="usulogin">Usuario:</label>
+            <input type="text" id="usulogin" name="usulogin" required>
         </div>
         <div class="form-group">
-            <label for="password">Contraseña:</label>
-            <input type="password" id="password" name="password" required>
+            <label for="usupassword">Contraseña:</label>
+            <input type="password" id="usupassword" name="usupassword" required>
         </div>
-        <a th:href="@{/dashboard}" class="login-btn">Iniciar Sesión</a>
+        <button type="submit" class="login-btn">Iniciar Sesión</button>
         <div class="espacio"></div>
         <a th:href="@{/}" class="login-btn">Regresar al Inicio</a>
     </form>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var error = /*[[${error}]]*/ null;
+        if(error) {
+            alert(error);
+        }
+        /*]]>*/
+    </script>
 </div>
+
 </body>
 </html>

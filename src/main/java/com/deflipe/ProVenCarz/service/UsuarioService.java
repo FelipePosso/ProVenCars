@@ -32,4 +32,9 @@ public class UsuarioService implements IusuarioService {
     public void delete(int usuid) {
 
     }
+
+    @Override
+    public Optional<Usuario> findByUsulogin(String usulogin) {
+        return data.findByUsulogin(usulogin);
+    }
 }
